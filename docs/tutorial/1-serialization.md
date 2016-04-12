@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This tutorial will cover creating a simple pastebin code highlighting Web API.  Along the way it will introduce the various components that make up REST framework, and give you a comprehensive understanding of how everything fits together.
+В  данном параграфе мы обсудим создание простого Web API для сервиса подсветки синатксиса фрагментов кода наподобии `pastebin`. Здесь будет пресдтавлено описание некоторых компонетов, из которых состоит REST фреймворк, котрое позволит вам составить некоторое представление о том как же они работают и взаимодействуют.
 
-The tutorial is fairly in-depth, so you should probably get a cookie and a cup of your favorite brew before getting started.  If you just want a quick overview, you should head over to the [quickstart] documentation instead.
+Описание здесь приводится довольно подробное, так что, перед тем как начать, запаситесь печенюшками и кружечкой вашего любимого напитка. Если вам будет достаточно только общего описания, то тогда лучше почитайте [Быстрый старт][quickstart].
 
 ---
 
-**Note**: The code for this tutorial is available in the [tomchristie/rest-framework-tutorial][repo] repository on GitHub.  The completed implementation is also online as a sandbox version for testing, [available here][sandbox].
+**Note**: Весь представленный код доступен на GitHub [tomchristie/rest-framework-tutorial][repo]. Также доступен работающей [демо-сервис][sandbox].
 
 ---
 
