@@ -2,9 +2,9 @@
 
 ## Introduction
 
-В  данном параграфе мы обсудим создание простого Web API для сервиса подсветки синатксиса фрагментов кода наподобии `pastebin`. Здесь будет пресдтавлено описание некоторых компонетов, из которых состоит REST фреймворк, котрое позволит вам составить некоторое представление о том как же они работают и взаимодействуют.
+В  данном параграфе мы обсудим создание простого Web API для сервиса подсветки синатксиса фрагментов кода наподобии `pastebin`. Здесь будет представлено описание некоторых компонетов REST фреймворка, которое позволит вам составить представление о том как они работают и взаимодействуют.
 
-Описание здесь приводится довольно подробное, так что, перед тем как начать, запаситесь печенюшками и кружечкой вашего любимого напитка. Если вам будет достаточно только общего описания, то тогда лучше почитайте [Быстрый старт][quickstart].
+Описание здесь приводится довольно подробное, так что, перед тем как начать изучение, запаситесь печенюшками и кружечкой вашего любимого напитка. Если вам будет достаточно только общего описания, то тогда лучше почитайте [быстрый старт][quickstart].
 
 ---
 
@@ -12,20 +12,20 @@
 
 ---
 
-## Setting up a new environment
+## Настрока окружения
 
-Before we do anything else we'll create a new virtual environment, using [virtualenv].  This will make sure our package configuration is kept nicely isolated from any other projects we're working on.
+Для начала создадим виртуальное окружение, используя [virtualenv]. Виртуальное окружение позволяет изолировать используемые нами пакеты от других проектов, над которыми мы работаем.
 
     virtualenv env
     source env/bin/activate
 
-Now that we're inside a virtualenv environment, we can install our package requirements.
+Теперь мы внутри нашего окружения и можем установить необходимые пакеты.
 
     pip install django
     pip install djangorestframework
     pip install pygments  # We'll be using this for the code highlighting
 
-**Note:** To exit the virtualenv environment at any time, just type `deactivate`.  For more information see the [virtualenv documentation][virtualenv].
+**Note:** Для того чтобы выйти из виртуального окружения, просто выполните команду `deactivate`.  Для получения более подробной информации рекоммендуем прочитать документацию по [virtualenv][virtualenv].
 
 ## Getting started
 
