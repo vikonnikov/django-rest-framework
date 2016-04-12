@@ -36,7 +36,7 @@
 
 ## Сериализаторы
 
-Во-первых, давайте добавим несколько сериализаторов. Создадим новый модуль `tutorial/quickstart/serializers.py` that we'll use for our data representations.
+Во-первых, давайте добавим несколько сериализаторов, которые мы будем использовать для получения определенного представления данных, хранимых в СУБД. Создадим новый модуль `tutorial/quickstart/serializers.py`.
 
     from django.contrib.auth.models import User, Group
     from rest_framework import serializers
@@ -110,7 +110,7 @@
 
 ## Настройки
 
-We'd also like to set a few global settings.  We'd like to turn on pagination, and we want our API to only be accessible to admin users.  The settings module will be in `tutorial/settings.py`
+В файл `tutorial/settings.py` нужно добавить еще пару настроек. Мы бы хотели чтобы наше API было дсотупно только для пользователей с правами администратора. Также настроим постраничное отображение списков (по 10 объектов на странице).
 
     INSTALLED_APPS = (
         ...
@@ -190,7 +190,7 @@ We'd also like to set a few global settings.  We'd like to turn on pagination, a
 
 Великолемно, все оч просто!
 
-If you want to get a more in depth understanding of how REST framework fits together head on over to [the tutorial][tutorial], or start browsing the [API guide][guide].
+Если вам итересно узнать больше подробностей о работе REST фреймворка, тогда пройдите [учебник][tutorial] или [руководство по API][guide].
 
 [readme-example-api]: ../#example
 [image]: ../img/quickstart.png
