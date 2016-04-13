@@ -103,7 +103,7 @@ REST фреймворк использует объект `Request`, унасл�
 
     def snippet_list(request, format=None):
 
-and
+и
 
     def snippet_detail(request, pk, format=None):
 
@@ -124,9 +124,9 @@ and
 
 ## Как это выглядит?
 
-Go ahead and test the API from the command line, as we did in [tutorial part 1][tut-1].  Everything is working pretty similarly, although we've got some nicer error handling if we send invalid requests.
+Давайте протестируем API из командной строки также как быделали в [части 1][tut-1]. Все как и раньше прекрасно работает, но теперь  еще появилась возможность обработки ошибок в случае отправки неверных запросов.
 
-We can get a list of all of the snippets, as before.
+Получаем список всех сниппетов:
 
     http http://127.0.0.1:8000/snippets/
 
@@ -151,17 +151,17 @@ We can get a list of all of the snippets, as before.
       }
     ]
 
-We can control the format of the response that we get back, either by using the `Accept` header:
+Мы можем контроллировать формат получаемых данных, используя заголовок запроса `Accept`:
 
     http http://127.0.0.1:8000/snippets/ Accept:application/json  # Request JSON
     http http://127.0.0.1:8000/snippets/ Accept:text/html         # Request HTML
 
-Or by appending a format suffix:
+Или просто добавим суффикс в конец URL:
 
     http http://127.0.0.1:8000/snippets.json  # JSON suffix
     http http://127.0.0.1:8000/snippets.api   # Browsable API suffix
 
-Similarly, we can control the format of the request that we send, using the `Content-Type` header.
+Аналогично мы можем контроллировать формат запроса, используя заголовок  `Content-Type`.
 
     # POST using form data
     http --form POST http://127.0.0.1:8000/snippets/ code="print 123"
