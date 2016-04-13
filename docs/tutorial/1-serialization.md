@@ -122,11 +122,11 @@
 
 ## Работа с сериализатором
 
-Before we go any further we'll familiarize ourselves with using our new Serializer class.  Let's drop into the Django shell.
+Преждем чем мы двинемся дальше давайте немного поподробнее разберемся с классом сериализатора. Перейдите в режим интерактивной работы с Django.
 
     python manage.py shell
-
-Okay, once we've got a few imports out of the way, let's create a couple of code snippets to work with.
+    
+Ок, после того как мы сделали несколько импортов, создадим парочку сниппетов.
 
     from snippets.models import Snippet
     from snippets.serializers import SnippetSerializer
@@ -139,26 +139,26 @@ Okay, once we've got a few imports out of the way, let's create a couple of code
     snippet = Snippet(code='print "hello, world"\n')
     snippet.save()
 
-We've now got a few snippet instances to play with.  Let's take a look at serializing one of those instances.
+Теперь у нас есть несколько объектов с фрагменетами кода. Давайте взглянем на сериализованные данные из этих объектов.
 
     serializer = SnippetSerializer(snippet)
     serializer.data
     # {'pk': 2, 'title': u'', 'code': u'print "hello, world"\n', 'linenos': False, 'language': u'python', 'style': u'friendly'}
 
-At this point we've translated the model instance into Python native datatypes.  To finalize the serialization process we render the data into `json`.
+Наш объект был преобразован к стандартным питоновским типам данных. Для преобразования полученных данных в `json` воспользуемся слудеющим кодом:
 
     content = JSONRenderer().render(serializer.data)
     content
     # '{"pk": 2, "title": "", "code": "print \\"hello, world\\"\\n", "linenos": false, "language": "python", "style": "friendly"}'
 
-Deserialization is similar.  First we parse a stream into Python native datatypes...
+Процесс десериализации аналогичен. Сначала мы преобразовываем данные к стандартым питовским типам...
 
     from django.utils.six import BytesIO
 
     stream = BytesIO(content)
     data = JSONParser().parse(stream)
 
-...then we restore those native datatypes into a fully populated object instance.
+...а уже затем преобразуем их в объект
 
     serializer = SnippetSerializer(data=data)
     serializer.is_valid()
@@ -168,9 +168,9 @@ Deserialization is similar.  First we parse a stream into Python native datatype
     serializer.save()
     # <Snippet: Snippet object>
 
-Notice how similar the API is to working with forms.  The similarity should become even more apparent when we start writing views that use our serializer.
+Стоит отметить, что это очень похоже на API, используемое при работе с формами. Сходство станет еще более очевидным, когда мы начнем писать представления для нашего сериализатора.
 
-We can also serialize querysets instead of model instances.  To do so we simply add a `many=True` flag to the serializer arguments.
+Также мы можем сериализовать не только объект модели, но и их набор. Для этого необходимо добавить аргумент `many=True` в констурктор сериализатора.
 
     serializer = SnippetSerializer(Snippet.objects.all(), many=True)
     serializer.data
