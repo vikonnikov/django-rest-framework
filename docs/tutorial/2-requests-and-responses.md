@@ -18,18 +18,19 @@ REST фреймворк использует объект `Request`, унасл�
 
 ## Коды состояния
 
-Using numeric HTTP status codes in your views doesn't always make for obvious reading, and it's easy to not notice if you get an error code wrong.  REST framework provides more explicit identifiers for each status code, such as `HTTP_400_BAD_REQUEST` in the `status` module.  It's a good idea to use these throughout rather than using numeric identifiers.
+Использование числовых кодов ошибок не всегда удобно и понятно. Поэтому в REST фреймворке предусметрен более явный способ описания ошибок, например, `HTTP_400_BAD_REQUEST` в модуле `status`.
 
 ## Обертки для API-вьюх
 
-REST framework provides two wrappers you can use to write API views.
+В REST фреймворке предусмотрены две обертки позволяющие вам создавать вьюхи для API.
 
-1. The `@api_view` decorator for working with function based views.
-2. The `APIView` class for working with class based views.
 
-These wrappers provide a few bits of functionality such as making sure you receive `Request` instances in your view, and adding context to `Response` objects so that content negotiation can be performed.
+1. Декоратор `@api_view` для работы с вьюхами-функциями.
+2. Класс `APIView` для работы с вьюхами на базе классов.
 
-The wrappers also provide behaviour such as returning `405 Method Not Allowed` responses when appropriate, and handling any `ParseError` exception that occurs when accessing `request.data` with malformed input.
+Данные обертки предоставляют некоторый функционал, который позволяет передавать в ваши вьюхи объекты `Request`и добавляет контекст в объекты `Response`.
+
+Также обертки позволяют контролировать доступ к методам вьюхи и возвращают `405 Method Not Allowed` когда это необходимо, а также возвращают исключение `ParseError`, возникающее при обращении к `request.data`, если на вход были переданы неверные данные.
 
 ## Объединение всех компонентов
 
