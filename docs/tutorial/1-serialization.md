@@ -1,6 +1,6 @@
-# Tutorial 1: Serialization
+# Tutorial 1: Сериализация
 
-## Introduction
+## Введение
 
 В  данном параграфе мы обсудим создание простого Web API для сервиса подсветки синатксиса фрагментов кода наподобии `pastebin`. Здесь будет представлено описание некоторых компонетов REST фреймворка, которое позволит вам составить представление о том как они работают и взаимодействуют.
 
@@ -27,20 +27,21 @@
 
 **Note:** Для того чтобы выйти из виртуального окружения, просто выполните команду `deactivate`.  Для получения более подробной информации рекоммендуем прочитать документацию по [virtualenv][virtualenv].
 
-## Getting started
+## Начало работы
 
-Okay, we're ready to get coding.
-To get started, let's create a new project to work with.
+Итак, теперь мы готовы.
+Давайте создадим новый проект, с которым будем в дальнейшем работать.
 
     cd ~
     django-admin.py startproject tutorial
     cd tutorial
 
-Once that's done we can create an app that we'll use to create a simple Web API.
+Создадим новое приложение, в котором и будем создавать наш простенький Web API.
 
     python manage.py startapp snippets
 
-We'll need to add our new `snippets` app and the `rest_framework` app to `INSTALLED_APPS`. Let's edit the `tutorial/settings.py` file:
+Добавим нашу аппликуху `snippets` и `rest_framework` в переменную `INSTALLED_APPS`.
+Отредактируйте файл `tutorial/settings.py` следующим образом:
 
     INSTALLED_APPS = (
         ...
@@ -48,11 +49,9 @@ We'll need to add our new `snippets` app and the `rest_framework` app to `INSTAL
         'snippets.apps.SnippetsConfig',
     )
 
-Okay, we're ready to roll.
+## Создание модели
 
-## Creating a model to work with
-
-For the purposes of this tutorial we're going to start by creating a simple `Snippet` model that is used to store code snippets.  Go ahead and edit the `snippets/models.py` file.  Note: Good programming practices include comments.  Although you will find them in our repository version of this tutorial code, we have omitted them here to focus on the code itself.
+Для решения поставленной в данной обучалке задачи мы создадим модель `Snippet`, которая будет использоваться для хранения фрагментов кода. Отредактируем файл `snippets/models.py`.  Note: Хороший программист всегда оставляет комментарии в своем коде. Все комментарии к приведенному ниже коду вы найдете в репозитории данного приложения, здесь же мы решили опустить все комментарии, для того чтобы сосредоточиться именно на коде.
 
     from django.db import models
     from pygments.lexers import get_all_lexers
@@ -74,12 +73,12 @@ For the purposes of this tutorial we're going to start by creating a simple `Sni
         class Meta:
             ordering = ('created',)
 
-We'll also need to create an initial migration for our snippet model, and sync the database for the first time.
+Создадим миграцию для нашей новой модели и синхронизируем её базой данных.
 
     python manage.py makemigrations snippets
     python manage.py migrate
 
-## Creating a Serializer class
+## Создание класса сериализатора
 
 The first thing we need to get started on our Web API is to provide a way of serializing and deserializing the snippet instances into representations such as `json`.  We can do this by declaring serializers that work very similar to Django's forms.  Create a file in the `snippets` directory named `serializers.py` and add the following.
 
@@ -177,7 +176,7 @@ We can also serialize querysets instead of model instances.  To do so we simply 
     serializer.data
     # [OrderedDict([('pk', 1), ('title', u''), ('code', u'foo = "bar"\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('pk', 2), ('title', u''), ('code', u'print "hello, world"\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('pk', 3), ('title', u''), ('code', u'print "hello, world"'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])]
 
-## Using ModelSerializers
+## Использование класса ModelSerializers
 
 Our `SnippetSerializer` class is replicating a lot of information that's also contained in the `Snippet` model.  It would be nice if we could keep our code a bit  more concise.
 
@@ -304,7 +303,7 @@ We also need to wire up the root urlconf, in the `tutorial/urls.py` file, to inc
 
 It's worth noting that there are a couple of edge cases we're not dealing with properly at the moment.  If we send malformed `json`, or if a request is made with a method that the view doesn't handle, then we'll end up with a 500 "server error" response.  Still, this'll do for now.
 
-## Testing our first attempt at a Web API
+## Тестирование нашего Web API
 
 Now we can start up a sample server that serves our snippets.
 
@@ -373,7 +372,7 @@ Or we can get a particular snippet by referencing its id:
 
 Similarly, you can have the same json displayed by visiting these URLs in a web browser.
 
-## Where are we now
+## Что же мы сделали
 
 We're doing okay so far, we've got a serialization API that feels pretty similar to Django's Forms API, and some regular Django views.
 
