@@ -80,7 +80,7 @@
 
 ## Создание класса сериализатора
 
-The first thing we need to get started on our Web API is to provide a way of serializing and deserializing the snippet instances into representations such as `json`.  We can do this by declaring serializers that work very similar to Django's forms.  Create a file in the `snippets` directory named `serializers.py` and add the following.
+Для создания Web API необходимо предусмотреть способ сериализации и десериализации нашего объекта, например, в `json` представление. Для этого давайте создадим сериализаторы, которые по принципу работы очень похожи на Django-формы. В директории `snippets` создадим файл `serializers.py` и скопируем в него следующее содержимое.
 
     from rest_framework import serializers
     from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
@@ -112,15 +112,15 @@ The first thing we need to get started on our Web API is to provide a way of ser
             instance.save()
             return instance
 
-The first part of the serializer class defines the fields that get serialized/deserialized.  The `create()` and `update()` methods define how fully fledged instances are created or modified when calling `serializer.save()`
+В начале класса сериализатора мы описываем сериализуемые поля. Методы `create()` и `update()` будут вызваны при создании объекта или его модификации при вызове метода `serializer.save()`.
 
-A serializer class is very similar to a Django `Form` class, and includes similar validation flags on the various fields, such as `required`, `max_length` and `default`.
+Класс сериализатора очень похож на класс Django `Form`. Описываеме в нем поля также могут содержать такие проверочные аттрибуты как `required`, `max_length` и `default`.
 
-The field flags can also control how the serializer should be displayed in certain circumstances, such as when rendering to HTML. The `{'base_template': 'textarea.html'}` flag above is equivalent to using `widget=widgets.Textarea` on a Django `Form` class. This is particularly useful for controlling how the browsable API should be displayed, as we'll see later in the tutorial.
+Аттрибуты полей также позволяют управлять отображением поля в сгенерированном HTML-представлении. Например, аттрибут `{'base_template': 'textarea.html'}` явлется эквивалентом `widget=widgets.Textarea` класса `Form`. Чуть позже мы увидим как использовать данные аттрибуты для управления отображением полей в браузерном API.
 
-We can actually also save ourselves some time by using the `ModelSerializer` class, as we'll see later, but for now we'll keep our serializer definition explicit.
+Мы можем сэкономить немного времени используя уже имеющиеся особенности класса `ModelSerializer`, но давайте пока оставим все как есть, в явном виде.
 
-## Working with Serializers
+## Работа с сериализатором
 
 Before we go any further we'll familiarize ourselves with using our new Serializer class.  Let's drop into the Django shell.
 
