@@ -191,11 +191,11 @@ Similarly, we can control the format of the request that we send, using the `Con
 
 ### Браузабельность =D
 
-Because the API chooses the content type of the response based on the client request, it will, by default, return an HTML-formatted representation of the resource when that resource is requested by a web browser.  This allows for the API to return a fully web-browsable HTML representation.
+В REST фреймворке предусмотрена возможность отображения API в браузере в виде HTML-форм, кроме того все результаты возвращаемые вашим API будут также отформатированны и представлены в удобной форме.
 
-Having a web-browsable API is a huge usability win, and makes developing and using your API much easier.  It also dramatically lowers the barrier-to-entry for other developers wanting to inspect and work with your API.
+Возможность использовать API непосредственно из браузера очень удобна при разработке и отладке вашего API. Особенно эта фича удобна для сторонних разработчиков, использующих ваше API.
 
-See the [browsable api][browsable-api] topic for more information about the browsable API feature and how to customize it.
+Для более детальной информации о браузероном API и его настройке смотри раздел [браузерное api][browsable-api].
 
 ## Что дальше?
 
