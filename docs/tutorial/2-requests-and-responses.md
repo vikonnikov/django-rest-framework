@@ -97,9 +97,9 @@ REST фреймворк использует объект `Request`, унасл�
 
 ## Добавляем суффиксы форматирования в URLs 
 
-To take advantage of the fact that our responses are no longer hardwired to a single content type let's add support for format suffixes to our API endpoints.  Using format suffixes gives us URLs that explicitly refer to a given format, and means our API will be able to handle URLs such as [http://example.com/api/items/4/.json][json-url].
+Для того чтобы возвращаемые ответы содержали данные в нужном для нас формате, давайте добавим поддержку суффиксов форматирования.  Суффиксы форматирования задаются в URL адресах, которые может обрабатывать наш API, например, [http://example.com/api/items/4/.json][json-url].
 
-Start by adding a `format` keyword argument to both of the views, like so.
+Давайте добавим ключевой аргумент `format` в обе наши вьюхи.
 
     def snippet_list(request, format=None):
 
@@ -107,7 +107,7 @@ and
 
     def snippet_detail(request, pk, format=None):
 
-Now update the `urls.py` file slightly, to append a set of `format_suffix_patterns` in addition to the existing URLs.
+Немного откорректируем файл `urls.py` и в дополнение к нашим адресам добавим `format_suffix_patterns`.
 
     from django.conf.urls import url
     from rest_framework.urlpatterns import format_suffix_patterns
@@ -120,7 +120,7 @@ Now update the `urls.py` file slightly, to append a set of `format_suffix_patter
 
     urlpatterns = format_suffix_patterns(urlpatterns)
 
-We don't necessarily need to add these extra url patterns in, but it gives us a simple, clean way of referring to a specific format.
+Нам не нужно добавлять какие-то новые паттерны для адресов, этот способ максимально прост и позволяет нам задавать формат возвращаемых данных довольно очевидным способом.
 
 ## Как это выглядит?
 
@@ -187,7 +187,7 @@ Similarly, we can control the format of the request that we send, using the `Con
         "style": "friendly"
     }
 
-Now go and open the API in a web browser, by visiting [http://127.0.0.1:8000/snippets/][devserver].
+Теперь откройте ваше API в браузере, перейдя по ссылке [http://127.0.0.1:8000/snippets/][devserver].
 
 ### Браузабельность =D
 
@@ -199,7 +199,7 @@ See the [browsable api][browsable-api] topic for more information about the brow
 
 ## Что дальше?
 
-In [tutorial part 3][tut-3], we'll start using class based views, and see how generic views reduce the amount of code we need to write.
+В [части 3][tut-3] вы узнаете о том как использовать представления на основе классов, а также увидите как использование базовых представлений позволяет уменьшить количество кода.
 
 [json-url]: http://example.com/api/items/4/.json
 [devserver]: http://127.0.0.1:8000/snippets/
