@@ -5,14 +5,14 @@
 
 ## Объекты запроса
 
-REST framework introduces a `Request` object that extends the regular `HttpRequest`, and provides more flexible request parsing.  The core functionality of the `Request` object is the `request.data` attribute, which is similar to `request.POST`, but more useful for working with Web APIs.
+REST фреймворк использует объект `Request`, унаследованный от стандартного `HttpRequest`, и предоставляет более гибкие возможности обработки запросов. Основной функционал объекта `Request` заложен в аттрибут `request.data`, напоминающий `request.POST`, но более удобный для работы с Web API.
 
     request.POST  # Only handles form data.  Only works for 'POST' method.
     request.data  # Handles arbitrary data.  Works for 'POST', 'PUT' and 'PATCH' methods.
 
 ## Объекты ответа
 
-REST framework also introduces a `Response` object, which is a type of `TemplateResponse` that takes unrendered content and uses content negotiation to determine the correct content type to return to the client.
+В REST фреймворке используется объект `Response`, унаследованный от `TemplateResponse`, содержащий неотрендеренный контент и в зависимости от запрашиваемого клиентом типа контента ему возвращется соответсвующий ответ.
 
     return Response(data)  # Renders to content type as requested by the client.
 
