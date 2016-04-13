@@ -374,9 +374,9 @@ It's worth noting that there are a couple of edge cases we're not dealing with p
 
 ## Что же мы сделали
 
-We're doing okay so far, we've got a serialization API that feels pretty similar to Django's Forms API, and some regular Django views.
+Мы сделали API для сериализации, причем выглядит оно очень похожим на API для форм Django, а также создали несколько стандарных вьюх.
 
-Our API views don't do anything particularly special at the moment, beyond serving `json` responses, and there are some error handling edge cases we'd still like to clean up, but it's a functioning Web API.
+Вьюхи для нашего API не делают ничего особенного, только обработка `json` запросов и обработка некоторых ошибок, но тем не менее мы имеем работающий Web API.
 
 [Во второй части][tut-2] мы увидим как можно улучшить наш код.
 
