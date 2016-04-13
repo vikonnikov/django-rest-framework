@@ -178,19 +178,19 @@
 
 ## Использование класса ModelSerializers
 
-Our `SnippetSerializer` class is replicating a lot of information that's also contained in the `Snippet` model.  It would be nice if we could keep our code a bit  more concise.
+Наш класса `SnippetSerializer` содержит много дублирующей информации, содержащейся в модели `Snippet`. Было бы неплохо, если бы наш код стал немного компактнее и короче.
 
-In the same way that Django provides both `Form` classes and `ModelForm` classes, REST framework includes both `Serializer` classes, and `ModelSerializer` classes.
+Подобно тому как в Django реализованы классы `Form` и `ModelForm`, в REST-фреймворке реализованы классы `Serializer` и `ModelSerializer`.
 
-Let's look at refactoring our serializer using the `ModelSerializer` class.
-Open the file `snippets/serializers.py` again, and replace the `SnippetSerializer` class with the following.
+Давайте взглянем на класс нашего сниппета, переписанный с использованием класса `ModelSerializer`.
+Снова откройте файл `snippets/serializers.py` и замените старое описание класса `SnippetSerializer` на новое.
 
     class SnippetSerializer(serializers.ModelSerializer):
         class Meta:
             model = Snippet
             fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
 
-One nice property that serializers have is that you can inspect all the fields in a serializer instance, by printing its representation. Open the Django shell with `python manage.py shell`, then try the following:
+У сетриализатора есть одна полезная особенность - вы можете просмотреть все его поля, для этого достаточно вывести его представление. Откройте Django-консоль `python manage.py shell` и введите следующий код:
 
     from snippets.serializers import SnippetSerializer
     serializer = SnippetSerializer()
@@ -203,12 +203,12 @@ One nice property that serializers have is that you can inspect all the fields i
     #    language = ChoiceField(choices=[('Clipper', 'FoxPro'), ('Cucumber', 'Gherkin'), ('RobotFramework', 'RobotFramework'), ('abap', 'ABAP'), ('ada', 'Ada')...
     #    style = ChoiceField(choices=[('autumn', 'autumn'), ('borland', 'borland'), ('bw', 'bw'), ('colorful', 'colorful')...
 
-It's important to remember that `ModelSerializer` classes don't do anything particularly magical, they are simply a shortcut for creating serializer classes:
+Важно запомнить что класс `ModelSerializer` не содержит ни какой магии, а просто позволяет создавать сериализаторы используя сокращенную форму:
 
-* An automatically determined set of fields.
-* Simple default implementations for the `create()` and `update()` methods.
+* Автоматически определяет набор необходимых полей.
+* Содержит дефолтные методы `create()` и `update()`.
 
-## Writing regular Django views using our Serializer
+## Создание стандарнтых представлений Django для нашего сериализатора
 
 Let's see how we can write some API views using our new Serializer class.
 For the moment we won't use any of REST framework's other features, we'll just write the views as regular Django views.
