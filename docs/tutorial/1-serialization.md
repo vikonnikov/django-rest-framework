@@ -210,12 +210,12 @@
 
 ## Создание стандарнтых представлений Django для нашего сериализатора
 
-Let's see how we can write some API views using our new Serializer class.
-For the moment we won't use any of REST framework's other features, we'll just write the views as regular Django views.
+Давайте посмотрим как же мы можем написать вьюхи для нашего API, используя наш сериализатор.
+Пока что мы не будем использовать дополнительных возможностей REST-фреймворка и будем писать обычные вьюхи Django.
 
-We'll start off by creating a subclass of HttpResponse that we can use to render any data we return into `json`.
+Начнем с того что напишем класс, наследуемый от HttpResponse, и предназначенный для обработки данных и выдачи их в формате `json`.
 
-Edit the `snippets/views.py` file, and add the following.
+Отредактируем файл `snippets/views.py` и добавим в него следующий код.
 
     from django.http import HttpResponse
     from django.views.decorators.csrf import csrf_exempt
@@ -233,7 +233,7 @@ Edit the `snippets/views.py` file, and add the following.
             kwargs['content_type'] = 'application/json'
             super(JSONResponse, self).__init__(content, **kwargs)
 
-The root of our API is going to be a view that supports listing all the existing snippets, or creating a new snippet.
+Пусть корнем нашего API будет служить вьюха, возвращающая список всех сниппетов или создающая новый сниппет.
 
     @csrf_exempt
     def snippet_list(request):
@@ -253,9 +253,9 @@ The root of our API is going to be a view that supports listing all the existing
                 return JSONResponse(serializer.data, status=201)
             return JSONResponse(serializer.errors, status=400)
 
-Note that because we want to be able to POST to this view from clients that won't have a CSRF token we need to mark the view as `csrf_exempt`.  This isn't something that you'd normally want to do, and REST framework views actually use more sensible behavior than this, but it'll do for our purposes right now.
+Поскольку мы хотим выполнять POST запросы от клиентов, не имеющих CSRF-токена, мы декорируем нашу вьюху с помощью `csrf_exempt`.  Конечно на продакшене не стоит этого делать, но для нашей задачи это допустимо.
 
-We'll also need a view which corresponds to an individual snippet, and can be used to retrieve, update or delete the snippet.
+Создадим вьюху, которая будет выдавать информацию об отдельном сниппете, а кроме того может обновлять его или удалять.
 
     @csrf_exempt
     def snippet_detail(request, pk):
@@ -283,7 +283,7 @@ We'll also need a view which corresponds to an individual snippet, and can be us
             snippet.delete()
             return HttpResponse(status=204)
 
-Finally we need to wire these views up.  Create the `snippets/urls.py` file:
+Теперь необходимо связать наши вьюхи с url-адресами. Создайте файл `snippets/urls.py`:
 
     from django.conf.urls import url
     from snippets import views
@@ -293,7 +293,7 @@ Finally we need to wire these views up.  Create the `snippets/urls.py` file:
         url(r'^snippets/(?P<pk>[0-9]+)/$', views.snippet_detail),
     ]
 
-We also need to wire up the root urlconf, in the `tutorial/urls.py` file, to include our snippet app's URLs.
+Также добавьте конфиг с новыми адресами в корневой конфиг `tutorial/urls.py`.
 
     from django.conf.urls import url, include
 
@@ -301,7 +301,7 @@ We also need to wire up the root urlconf, in the `tutorial/urls.py` file, to inc
         url(r'^', include('snippets.urls')),
     ]
 
-It's worth noting that there are a couple of edge cases we're not dealing with properly at the moment.  If we send malformed `json`, or if a request is made with a method that the view doesn't handle, then we'll end up with a 500 "server error" response.  Still, this'll do for now.
+Стоит отметить, что в нашем коде есть места, которые могут отрабатывать не самым подходящим образом, попросту выдавать ошибку в определенной ситуации. Например, если вьюха получит искаженный `json` или будет использовать метод запроса, который вьюха не умеет обрабатывать, то мы получим ошибку сервера 500 "server error".  Тем не менее, оставим все как есть.
 
 ## Тестирование нашего Web API
 
