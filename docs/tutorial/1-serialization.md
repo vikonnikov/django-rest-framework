@@ -305,13 +305,13 @@ It's worth noting that there are a couple of edge cases we're not dealing with p
 
 ## Тестирование нашего Web API
 
-Now we can start up a sample server that serves our snippets.
+Теперь мы можем запустить простой сервер, который будет обрабатывать наши сниппеты.
 
-Quit out of the shell...
+Выйдите из интерактивного режима...
 
 	quit()
 
-...and start up Django's development server.
+...и запустите отладочный сервер Django.
 
 	python manage.py runserver
 
@@ -322,15 +322,15 @@ Quit out of the shell...
 	Development server is running at http://127.0.0.1:8000/
 	Quit the server with CONTROL-C.
 
-In another terminal window, we can test the server.
+Откройте вторую консоль и уже в ней отправляйте запросы к серверу.
 
-We can test our API using [curl][curl] or [httpie][httpie]. Httpie is a user friendly http client that's written in Python. Let's install that.
+Для тестирования нашего API мы можем использовать консольные утилиты [curl][curl] или [httpie][httpie]. Httpie это простой и удобный http-клиент, написанный на Python. Давайте установим его.
 
-You can install httpie using pip:
+Устаноите httpie с помощью pip:
 
     pip install httpie
 
-Finally, we can get a list of all of the snippets:
+Получим список всех сниппетов:
 
     http http://127.0.0.1:8000/snippets/
 
@@ -355,7 +355,7 @@ Finally, we can get a list of all of the snippets:
       }
     ]
 
-Or we can get a particular snippet by referencing its id:
+Или же мы можем получить отдельный сниппет, указав его id:
 
     http http://127.0.0.1:8000/snippets/2/
 
@@ -370,7 +370,7 @@ Or we can get a particular snippet by referencing its id:
       "style": "friendly"
     }
 
-Similarly, you can have the same json displayed by visiting these URLs in a web browser.
+Если мы перейдем по ссылке в браузере то, увидим что будет выведен тот же самый json.
 
 ## Что же мы сделали
 
@@ -378,7 +378,7 @@ We're doing okay so far, we've got a serialization API that feels pretty similar
 
 Our API views don't do anything particularly special at the moment, beyond serving `json` responses, and there are some error handling edge cases we'd still like to clean up, but it's a functioning Web API.
 
-We'll see how we can start to improve things in [part 2 of the tutorial][tut-2].
+[Во второй части][tut-2] мы увидим как можно улучшить наш код.
 
 [quickstart]: quickstart.md
 [repo]: https://github.com/tomchristie/rest-framework-tutorial
