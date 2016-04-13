@@ -1,8 +1,8 @@
-# Tutorial 3: Class Based Views
+# Часть 3: Представления на основе классов
 
 We can also write our API views using class based views, rather than function based views.  As we'll see this is a powerful pattern that allows us to reuse common functionality, and helps us keep our code [DRY][dry].
 
-## Rewriting our API using class based views
+## Переработка API на базе представлений в виде классов
 
 We'll start by rewriting the root view as a class based view.  All this involves is a little bit of refactoring of `views.py`.
 
@@ -77,7 +77,7 @@ We'll also need to refactor our `urls.py` slightly now we're using class based v
 
 Okay, we're done.  If you run the development server everything should be working just as before.
 
-## Using mixins
+## Использование примесей
 
 One of the big wins of using class based views is that it allows us to easily compose reusable bits of behaviour.
 
@@ -124,7 +124,7 @@ The base class provides the core functionality, and the mixin classes provide th
 
 Pretty similar.  Again we're using the `GenericAPIView` class to provide the core functionality, and adding in mixins to provide the `.retrieve()`, `.update()` and `.destroy()` actions.
 
-## Using generic class based views
+## Использование вьюх на основе базовых представлений REST фреймворка
 
 Using the mixin classes we've rewritten the views to use slightly less code than before, but we can go one step further.  REST framework provides a set of already mixed-in generic views that we can use to trim down our `views.py` module even more.
 
