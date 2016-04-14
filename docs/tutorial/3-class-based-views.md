@@ -126,7 +126,8 @@
 
 ## Использование вьюх на основе базовых представлений REST фреймворка
 
-Using the mixin classes we've rewritten the views to use slightly less code than before, but we can go one step further.  REST framework provides a set of already mixed-in generic views that we can use to trim down our `views.py` module even more.
+При использовании примесей наш код стал немного компактее и короче, давайте сделаем еще один шаг.
+В REST фреймворке уже предусмотрено несколько базовых представлений, сочетающих в себе функционал примесей. Снова отредактируем файл `views.py`.
 
     from snippets.models import Snippet
     from snippets.serializers import SnippetSerializer
@@ -142,7 +143,7 @@ Using the mixin classes we've rewritten the views to use slightly less code than
         queryset = Snippet.objects.all()
         serializer_class = SnippetSerializer
 
-Wow, that's pretty concise.  We've gotten a huge amount for free, and our code looks like good, clean, idiomatic Django.
+Ничего себе, это просто невероятно короткий и читый код, вполне соответсвующий принципам Django.
 
 Далее перейдите к [части 4][tut-4], из неё вы узнаете о авторизации и правах доступа к нашему  API.
 
