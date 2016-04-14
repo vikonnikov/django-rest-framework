@@ -62,7 +62,7 @@
 
 Выглядит хорошо и про прежнему наш код похож на представления-функции.
 
-Поскльку мы используем представления на основе классов нам придеться немного изменить файл `urls.py`.
+Поскольку мы используем представления на основе классов нам придеться немного изменить файл `urls.py`.
 
     from django.conf.urls import url
     from rest_framework.urlpatterns import format_suffix_patterns
@@ -79,11 +79,11 @@
 
 ## Использование примесей
 
-One of the big wins of using class based views is that it allows us to easily compose reusable bits of behaviour.
+Возможность повторного использования реализованной логики, является одним из преимуществ использования представлений-классов.
 
-The create/retrieve/update/delete operations that we've been using so far are going to be pretty similar for any model-backed API views we create.  Those bits of common behaviour are implemented in REST framework's mixin classes.
+Операции создания/получения/обновления/удаления являются общими для любого API, работающего с моделями и объектами данных. Поэтому подобный функционал уже реализован в REST фреймворке в классах примесей.
 
-Let's take a look at how we can compose the views by using the mixin classes.  Here's our `views.py` module again.
+Давайте посмотрим как мы можем использовать примеси в нашем коде м снова отредактируем файл `views.py`.
 
     from snippets.models import Snippet
     from snippets.serializers import SnippetSerializer
@@ -102,9 +102,9 @@ Let's take a look at how we can compose the views by using the mixin classes.  H
         def post(self, request, *args, **kwargs):
             return self.create(request, *args, **kwargs)
 
-We'll take a moment to examine exactly what's happening here.  We're building our view using `GenericAPIView`, and adding in `ListModelMixin` and `CreateModelMixin`.
+Мы унаследовали наше представление от класса `GenericAPIView`, а также добавили еще два класса `ListModelMixin` и `CreateModelMixin`.
 
-The base class provides the core functionality, and the mixin classes provide the `.list()` and `.create()` actions.  We're then explicitly binding the `get` and `post` methods to the appropriate actions.  Simple enough stuff so far.
+Класс `GenericAPIView` обеспечивает весь базовый функционал, а `ListModelMixin` и `CreateModelMixin` добавляют два метода `.list()` и `.create()`.  Данные методы мы явным образом связываем с методами `get` и `post`, которые отрабатывают при запросах соответсвующего типа.  Все достаточно просто.
 
     class SnippetDetail(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
@@ -122,7 +122,7 @@ The base class provides the core functionality, and the mixin classes provide th
         def delete(self, request, *args, **kwargs):
             return self.destroy(request, *args, **kwargs)
 
-Pretty similar.  Again we're using the `GenericAPIView` class to provide the core functionality, and adding in mixins to provide the `.retrieve()`, `.update()` and `.destroy()` actions.
+Подобным образом мы правим `SnippetDetail`. Снова мы используем класс `GenericAPIView` для обеспечения базового функионала представления и добавляем примиси, в которых реализованы методы `.retrieve()`, `.update()` and `.destroy()`.
 
 ## Использование вьюх на основе базовых представлений REST фреймворка
 
