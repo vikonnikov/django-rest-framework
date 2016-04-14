@@ -1,4 +1,4 @@
-# Tutorial 4: Authentication & Permissions
+# Часть 4: Авторизация & Права доступа
 
 Currently our API doesn't have any restrictions on who can edit or delete code snippets.  We'd like to have some more advanced behavior in order to make sure that:
 
@@ -7,7 +7,7 @@ Currently our API doesn't have any restrictions on who can edit or delete code s
 * Only the creator of a snippet may update or delete it.
 * Unauthenticated requests should have full read-only access.
 
-## Adding information to our model
+## Добавляем информацию в нашу модель
 
 We're going to make a couple of changes to our `Snippet` model class.
 First, let's add a couple of fields.  One of those fields will be used to represent the user who created the code snippet.  The other field will be used to store the highlighted HTML representation of the code.
@@ -103,7 +103,7 @@ On the `SnippetList` view class, add the following method:
 
 The `create()` method of our serializer will now be passed an additional `'owner'` field, along with the validated data from the request.
 
-## Updating our serializer
+## Обновляем сериализатор
 
 Now that snippets are associated with the user that created them, let's update our `SnippetSerializer` to reflect that.  Add the following field to the serializer definition in `serializers.py`:
 
@@ -115,7 +115,7 @@ This field is doing something quite interesting.  The `source` argument controls
 
 The field we've added is the untyped `ReadOnlyField` class, in contrast to the other typed fields, such as `CharField`, `BooleanField` etc...  The untyped `ReadOnlyField` is always read-only, and will be used for serialized representations, but will not be used for updating model instances when they are deserialized. We could have also used `CharField(read_only=True)` here.
 
-## Adding required permissions to views
+## Добавляем права доступа в представления
 
 Now that code snippets are associated with users, we want to make sure that only authenticated users are able to create, update and delete code snippets.
 
@@ -129,7 +129,7 @@ Then, add the following property to **both** the `SnippetList` and `SnippetDetai
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-## Adding login to the Browsable API
+## Добавляем авторизацию для браузерного API
 
 If you open a browser and navigate to the browsable API at the moment, you'll find that you're no longer able to create new code snippets.  In order to do so we'd need to be able to login as a user.
 
@@ -218,7 +218,7 @@ We can make a successful request by including the username and password of one o
         "style": "friendly"
     }
 
-## Summary
+## Итоги
 
 We've now got a fairly fine-grained set of permissions on our Web API, and end points for users of the system and for the code snippets that they have created.
 
