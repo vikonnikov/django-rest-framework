@@ -1,6 +1,6 @@
-# Часть 4: Авторизация & Права доступа
+# Часть 4: Авторизация и права доступа
 
-Currently our API doesn't have any restrictions on who can edit or delete code snippets.  We'd like to have some more advanced behavior in order to make sure that:
+Сейчас наш API не имеет ни каких ограничений и каждый может редактировать или удалять сниппеты. Нам нужно реализовать немного более продвинутый функционал:
 
 * Code snippets are always associated with a creator.
 * Only authenticated users may create snippets.
