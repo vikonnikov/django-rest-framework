@@ -1,10 +1,10 @@
 # Часть 3: Представления на основе классов
 
-We can also write our API views using class based views, rather than function based views.  As we'll see this is a powerful pattern that allows us to reuse common functionality, and helps us keep our code [DRY][dry].
+Также мы можем разрабатывать представления для нашего API в виде классов, что более предпочтительно чем вьюхи-функции. Представления в виде классов имеют дополнительный встроенный функционал и позволяют придеживаться принципа [DRY][dry].
 
 ## Переработка API на базе представлений в виде классов
 
-We'll start by rewriting the root view as a class based view.  All this involves is a little bit of refactoring of `views.py`.
+Давайте перепишем наше корневое представление в виде класса. Для этого потребуется немного изменить наш код в файле `views.py`.
 
     from snippets.models import Snippet
     from snippets.serializers import SnippetSerializer
@@ -30,7 +30,7 @@ We'll start by rewriting the root view as a class based view.  All this involves
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-So far, so good.  It looks pretty similar to the previous case, but we've got better separation between the different HTTP methods.  We'll also need to update the instance view in `views.py`.
+Похоже на наш предыдущий код, но, как вы могли заметить, мы разделили наш код по типу HTTP методов. Поправим код представления для отдельного сниппета `views.py`.
 
     class SnippetDetail(APIView):
         """
@@ -60,9 +60,9 @@ So far, so good.  It looks pretty similar to the previous case, but we've got be
             snippet.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
 
-That's looking good.  Again, it's still pretty similar to the function based view right now.
+Выглядит хорошо и про прежнему наш код похож на представления-функции.
 
-We'll also need to refactor our `urls.py` slightly now we're using class based views.
+Поскльку мы используем представления на основе классов нам придеться немного изменить файл `urls.py`.
 
     from django.conf.urls import url
     from rest_framework.urlpatterns import format_suffix_patterns
@@ -75,7 +75,7 @@ We'll also need to refactor our `urls.py` slightly now we're using class based v
 
     urlpatterns = format_suffix_patterns(urlpatterns)
 
-Okay, we're done.  If you run the development server everything should be working just as before.
+Готово. Если теперь запустить отладочный сервер, то можно увидеть, что все работает точно также, как и до рефракторинга.
 
 ## Использование примесей
 
@@ -144,7 +144,7 @@ Using the mixin classes we've rewritten the views to use slightly less code than
 
 Wow, that's pretty concise.  We've gotten a huge amount for free, and our code looks like good, clean, idiomatic Django.
 
-Next we'll move onto [part 4 of the tutorial][tut-4], where we'll take a look at how we can deal with authentication and permissions for our API.
+Далее перейдите к [части 4][tut-4], из неё вы узнаете о авторизации и правах доступа к нашему  API.
 
 [dry]: http://en.wikipedia.org/wiki/Don't_repeat_yourself
 [tut-4]: 4-authentication-and-permissions.md
