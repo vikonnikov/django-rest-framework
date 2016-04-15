@@ -2,30 +2,30 @@
 
 Сейчас наш API не имеет ни каких ограничений и каждый может редактировать или удалять сниппеты. Нам нужно реализовать немного более продвинутый функционал:
 
-* Code snippets are always associated with a creator.
-* Only authenticated users may create snippets.
-* Only the creator of a snippet may update or delete it.
-* Unauthenticated requests should have full read-only access.
+* Сниппеты должны быть связаны с их создателем
+* Только авторизованные пользователи могут создавать сниппеты
+* Только создатель может редактировать или удалять
+* Неавторизованные пользователи могуть имеет доступ только на чтение
 
 ## Добавляем информацию в нашу модель
 
-We're going to make a couple of changes to our `Snippet` model class.
-First, let's add a couple of fields.  One of those fields will be used to represent the user who created the code snippet.  The other field will be used to store the highlighted HTML representation of the code.
+Нам внести некоторые изменения в код класса нашей модели `Snippet`.
+Давайте добавим несколько новых полей. Одно из полей будет содержать пользователя, создавшего сниппет. Второе поле будет использоваться для хранения html с подсвеченным синтаксисом нашего фрашмента кода.
 
-Add the following two fields to the `Snippet` model in `models.py`.
+Добавим следующие два поля в модель `Snippet` из файла `models.py`.
 
     owner = models.ForeignKey('auth.User', related_name='snippets')
     highlighted = models.TextField()
 
-We'd also need to make sure that when the model is saved, that we populate the highlighted field, using the `pygments` code highlighting library.
+Также следует позаботиться о том, чтобы во время сохранения модели, поле `highlighted` заполнялось подсвеченным кодом, для этого мы будем использовать библиотеку `pygments`.
 
-We'll need some extra imports:
+Нам необходимо импортировать следующие модули:
 
     from pygments.lexers import get_lexer_by_name
     from pygments.formatters.html import HtmlFormatter
     from pygments import highlight
 
-And now we can add a `.save()` method to our model class:
+Теперь у нашей модели мы переопределяем метод  `.save()`:
 
     def save(self, *args, **kwargs):
         """
@@ -40,15 +40,15 @@ And now we can add a `.save()` method to our model class:
         self.highlighted = highlight(self.code, lexer, formatter)
         super(Snippet, self).save(*args, **kwargs)
 
-When that's all done we'll need to update our database tables.
-Normally we'd create a database migration in order to do that, but for the purposes of this tutorial, let's just delete the database and start again.
+После этого мы должны обновить таблицы нашей базы данных.
+Обычно создается и накатывается новая миграция, но в нашем случае давайте просто удалим старую базу и создадим новую.
 
     rm -f tmp.db db.sqlite3
     rm -r snippets/migrations
     python manage.py makemigrations snippets
     python manage.py migrate
 
-You might also want to create a few different users, to use for testing the API.  The quickest way to do this will be with the `createsuperuser` command.
+Для тестирования нашего API создайте несколько новых пользователей. Наиболее быстрый способ создания нового пользователя - использование команды `createsuperuser`.
 
     python manage.py createsuperuser
 
