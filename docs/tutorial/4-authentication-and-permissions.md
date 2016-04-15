@@ -54,7 +54,7 @@
 
 ## Adding endpoints for our User models
 
-Now that we've got some users to work with, we'd better add representations of those users to our API.  Creating a new serializer is easy. In `serializers.py` add:
+Теперь у нас есть несколько пользователей, с которыми мы будем работать. Напишем сериализатор для объектов пользователей. В файл `serializers.py` добавим следующий код:
 
     from django.contrib.auth.models import User
 
