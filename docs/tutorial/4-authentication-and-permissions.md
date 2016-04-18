@@ -65,9 +65,9 @@
             model = User
             fields = ('id', 'username', 'snippets')
 
-Because `'snippets'` is a *reverse* relationship on the User model, it will not be included by default when using the `ModelSerializer` class, so we needed to add an explicit field for it.
+Добавим в сериализатор поле `'snippets'`, отвечающее за обрабную связь с моделью `User` и содержащее сниппеты, созданные данным пользователем. Данное поле не добавляется по умолчанию в `ModelSerializer`, поэтому мы сами добавляем его в сериализатор.
 
-We'll also add a couple of views to `views.py`.  We'd like to just use read-only views for the user representations, so we'll use the `ListAPIView` and `RetrieveAPIView` generic class based views.
+Давайте добавим еще парочку представлений в файл `views.py`. Нам нужны представления, предназначенные только для отображения пользователей, поэтому мы используем общие представления `ListAPIView` и `RetrieveAPIView`.
 
     from django.contrib.auth.models import User
 
@@ -81,11 +81,11 @@ We'll also add a couple of views to `views.py`.  We'd like to just use read-only
         queryset = User.objects.all()
         serializer_class = UserSerializer
 
-Make sure to also import the `UserSerializer` class
+Не забудьте импортировать класс `UserSerializer`
 
 	from snippets.serializers import UserSerializer
 
-Finally we need to add those views into the API, by referencing them from the URL conf. Add the following to the patterns in `urls.py`.
+Ну и что бы у нас наконец получилось API, добавим полученные представления, в конфиг URL адресов. Добавьте следующие паттерны в файл `urls.py`.
 
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
