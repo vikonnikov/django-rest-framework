@@ -188,7 +188,7 @@ Make sure to also import the `IsOwnerOrReadOnly` class.
 
 Now, if you open a browser again, you find that the 'DELETE' and 'PUT' actions only appear on a snippet instance endpoint if you're logged in as the same user that created the code snippet.
 
-## Authenticating with the API
+## Авторизация при использовании API
 
 Because we now have a set of permissions on the API, we need to authenticate our requests to it if we want to edit any snippets.  We haven't set up any [authentication classes][authentication], so the defaults are currently applied, which are `SessionAuthentication` and `BasicAuthentication`.
 
