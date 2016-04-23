@@ -117,7 +117,7 @@ This field is doing something quite interesting.  The `source` argument controls
 
 The field we've added is the untyped `ReadOnlyField` class, in contrast to the other typed fields, such as `CharField`, `BooleanField` etc...  The untyped `ReadOnlyField` is always read-only, and will be used for serialized representations, but will not be used for updating model instances when they are deserialized. We could have also used `CharField(read_only=True)` here.
 
-## Добавляем права доступа в представления
+## Добавляем права доступа к представлению
 
 Теперь нам хотелось бы сделать так, чтобы только авторизованные пользователи могли редактировать, обновлять или удалять сниппеты.
 
