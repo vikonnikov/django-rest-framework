@@ -52,7 +52,7 @@
 
     python manage.py createsuperuser
 
-## Adding endpoints for our User models
+## Добавим API для модели пользователя `User`
 
 Теперь у нас есть несколько пользователей, с которыми мы будем работать. Напишем сериализатор для объектов пользователей. В файл `serializers.py` добавим следующий код:
 
