@@ -92,16 +92,18 @@
 
 ## Связываем сниппеты с пользователями
 
-Right now, if we created a code snippet, there'd be no way of associating the user that created the snippet, with the snippet instance.  The user isn't sent as part of the serialized representation, but is instead a property of the incoming request.
+В данный момент при создании сниппета пользователь создавший его не связывается сним
 
-The way we deal with that is by overriding a `.perform_create()` method on our snippet views, that allows us to modify how the instance save is managed, and handle any information that is implicit in the incoming request or requested URL.
+На данный момент у нас не реализован механизм связывания снипппета с создавшим его пользователем. Пользователь не передается в сериализванных данных, но при этом мы можем извлечь его из соответствующего свойства объекта запроса.
 
-On the `SnippetList` view class, add the following method:
+Для решения данной задачей мы можем переопределить метод представления `.perform_create()`s. Данный метод позволяет нам модифицировать процессс сохранения объекта, а также извлекать и обрабатывать любые неявные данные, передающиеся в запросах или присутсвующих в запрашиваемом URL.
+
+Добавьте в класс `SnippetList` следующий метод:
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-The `create()` method of our serializer will now be passed an additional `'owner'` field, along with the validated data from the request.
+Теперь в метод `create()`, вместе с остальными валидными данными из запроса, будет передано дополнительное поле `'owner'`.
 
 ## Обновляем сериализатор
 
