@@ -220,9 +220,10 @@ We can make a successful request by including the username and password of one o
 
 ## Итоги
 
-We've now got a fairly fine-grained set of permissions on our Web API, and end points for users of the system and for the code snippets that they have created.
+Теперь у нас есть довольно токо настроенный набор ограничений для доступа к нашемeу Web API, мы добавили API для просмора списка всех имеющихся пользователей, а также пользователей создавших тот или иной сниппет.
 
-In [part 5][tut-5] of the tutorial we'll look at how we can tie everything together by creating an HTML endpoint for our highlighted snippets, and improve the cohesion of our API by using hyperlinking for the relationships within the system.
+В [главе 5][tut-5] мы обратим внимание на то, как объединить все в единое целое, создав API для наших подсвеченных сниппетов. Также мы попробуем улучшить связи внути нашего API за счет использования ссылочных связей.
+
 
 [authentication]: ../api-guide/authentication.md
 [tut-5]: 5-relationships-and-hyperlinked-apis.md
