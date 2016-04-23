@@ -105,9 +105,7 @@ The `create()` method of our serializer will now be passed an additional `'owner
 
 ## Обновляем сериализатор
 
-Теперь каждый сниппет связан с тем пользователем, который его создал.
-
-Now that snippets are associated with the user that created them, let's update our `SnippetSerializer` to reflect that.  Add the following field to the serializer definition in `serializers.py`:
+Теперь каждый сниппет связан с тем пользователем, который его создал. Давайте обновим наш сериализатор `SnippetSerializer`. Добавим еще одно поле в описание нашего сериализатора в модуль `serializers.py`:
 
     owner = serializers.ReadOnlyField(source='owner.username')
 
