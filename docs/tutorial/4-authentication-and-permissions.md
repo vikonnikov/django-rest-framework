@@ -152,7 +152,7 @@ Now if you open up the browser again and refresh the page you'll see a 'Login' l
 
 Once you've created a few code snippets, navigate to the '/users/' endpoint, and notice that the representation includes a list of the snippet pks that are associated with each user, in each user's 'snippets' field.
 
-## Object level permissions
+## Установка прав доступа на уровне объекта
 
 Really we'd like all code snippets to be visible to anyone, but also make sure that only the user that created a code snippet is able to update or delete it.
 
