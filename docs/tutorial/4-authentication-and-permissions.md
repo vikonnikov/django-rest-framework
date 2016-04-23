@@ -105,6 +105,8 @@ The `create()` method of our serializer will now be passed an additional `'owner
 
 ## Обновляем сериализатор
 
+Теперь каждый сниппет связан с тем пользователем, который его создал.
+
 Now that snippets are associated with the user that created them, let's update our `SnippetSerializer` to reflect that.  Add the following field to the serializer definition in `serializers.py`:
 
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -117,7 +119,7 @@ The field we've added is the untyped `ReadOnlyField` class, in contrast to the o
 
 ## Добавляем права доступа в представления
 
-Now that code snippets are associated with users, we want to make sure that only authenticated users are able to create, update and delete code snippets.
+Теперь нам хотелось бы сделать так, чтобы только авторизованные пользователи могли редактировать, обновлять или удалять сниппеты.
 
 REST framework includes a number of permission classes that we can use to restrict who can access a given view.  In this case the one we're looking for is `IsAuthenticatedOrReadOnly`, which will ensure that authenticated requests get read-write access, and unauthenticated requests get read-only access.
 
@@ -223,7 +225,6 @@ We can make a successful request by including the username and password of one o
 Теперь у нас есть довольно токо настроенный набор ограничений для доступа к нашемeу Web API, мы добавили API для просмора списка всех имеющихся пользователей, а также пользователей создавших тот или иной сниппет.
 
 В [главе 5][tut-5] мы обратим внимание на то, как объединить все в единое целое, создав API для наших подсвеченных сниппетов. Также мы попробуем улучшить связи внути нашего API за счет использования ссылочных связей.
-
 
 [authentication]: ../api-guide/authentication.md
 [tut-5]: 5-relationships-and-hyperlinked-apis.md
