@@ -190,9 +190,9 @@ Now, if you open a browser again, you find that the 'DELETE' and 'PUT' actions o
 
 ## Авторизация при использовании API
 
-Because we now have a set of permissions on the API, we need to authenticate our requests to it if we want to edit any snippets.  We haven't set up any [authentication classes][authentication], so the defaults are currently applied, which are `SessionAuthentication` and `BasicAuthentication`.
+Поскольку мы установили права доступа к нашему API, нам необходимо авторизоваться, если мы хотим отредактировать какой-нибдуь из сниппетов. Мы не установили ни один из [классов авторизации][authentication], но, тем не менее, по-умолчанию применяются несколько классов `SessionAuthentication` and `BasicAuthentication`.
 
-When we interact with the API through the web browser, we can login, and the browser session will then provide the required authentication for the requests.
+Когда для доступа к API мы используем браузер, у нас есть возможность авторизоваться, после чего в рамках установленной сессии мы можем отправлять авторзованные запросы.
 
 If we're interacting with the API programmatically we need to explicitly provide the authentication credentials on each request.
 
