@@ -111,7 +111,7 @@
 
     owner = serializers.ReadOnlyField(source='owner.username')
 
-**Note**: Make sure you also add `'owner',` to the list of fields in the inner `Meta` class.
+**Note**: Убедитесь что вы добавили `'owner',` в список полей внутреннего метакласса `Meta`.
 
 This field is doing something quite interesting.  The `source` argument controls which attribute is used to populate a field, and can point at any attribute on the serialized instance.  It can also take the dotted notation shown above, in which case it will traverse the given attributes, in a similar way as it is used with Django's template language.
 
@@ -133,15 +133,15 @@ Then, add the following property to **both** the `SnippetList` and `SnippetDetai
 
 ## Добавляем авторизацию для браузерного API
 
-If you open a browser and navigate to the browsable API at the moment, you'll find that you're no longer able to create new code snippets.  In order to do so we'd need to be able to login as a user.
+Если вы откроете браузер и попробуете перейти по одному из адресов нашего API, то вы заметите что больше не можете создавать новые сниппеты. Теперь для выполнения данного действия нам нужно авторизоваться.
 
-We can add a login view for use with the browsable API, by editing the URLconf in our project-level `urls.py` file.
+Добавим представление для авторизации в нашем браузерном API. Для этого нам необходимо отредактировать модуль  `urls.py`.
 
-Add the following import at the top of the file:
+Добавьте в начало файла импорт функции:
 
     from django.conf.urls import include
 
-And, at the end of the file, add a pattern to include the login and logout views for the browsable API.
+В конец файла добавьте паттерн, подключающей представления для авторизации и завершения сеанса браузерного API.
 
     urlpatterns += [
         url(r'^api-auth/', include('rest_framework.urls',
@@ -155,6 +155,8 @@ Now if you open up the browser again and refresh the page you'll see a 'Login' l
 Once you've created a few code snippets, navigate to the '/users/' endpoint, and notice that the representation includes a list of the snippet pks that are associated with each user, in each user's 'snippets' field.
 
 ## Установка прав доступа на уровне объекта
+
+Все наши сниппеты доступны для чтения любому пользователю. Давайте сделаем так что редактировать или удалять сниппет может только создавший его пользователь.
 
 Really we'd like all code snippets to be visible to anyone, but also make sure that only the user that created a code snippet is able to update or delete it.
 
