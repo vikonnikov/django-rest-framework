@@ -158,8 +158,6 @@ Once you've created a few code snippets, navigate to the '/users/' endpoint, and
 
 Все наши сниппеты доступны для чтения любому пользователю. Давайте сделаем так что редактировать или удалять сниппет может только создавший его пользователь.
 
-Really we'd like all code snippets to be visible to anyone, but also make sure that only the user that created a code snippet is able to update or delete it.
-
 To do that we're going to need to create a custom permission.
 
 In the snippets app, create a new file, `permissions.py`
