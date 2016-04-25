@@ -158,9 +158,9 @@ REST фреймворк содержит набор классов, которы
 
 Все наши сниппеты доступны для чтения любому пользователю. Давайте сделаем так что редактировать или удалять сниппет может только создавший его пользователь.
 
-To do that we're going to need to create a custom permission.
+Для этого нам необходимо создать кастомный класс для прав доступа.
 
-In the snippets app, create a new file, `permissions.py`
+В приложении `snippets`, создайте новый файл `permissions.py`
 
     from rest_framework import permissions
 
@@ -179,16 +179,16 @@ In the snippets app, create a new file, `permissions.py`
             # Write permissions are only allowed to the owner of the snippet.
             return obj.owner == request.user
 
-Now we can add that custom permission to our snippet instance endpoint, by editing the `permission_classes` property on the `SnippetDetail` view class:
+Добавим данный класс в список `permission_classes` нашего представления `SnippetDetail`:
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
-Make sure to also import the `IsOwnerOrReadOnly` class.
+Убедитесь что вы ипортировали класс `IsOwnerOrReadOnly`.
 
     from snippets.permissions import IsOwnerOrReadOnly
 
-Now, if you open a browser again, you find that the 'DELETE' and 'PUT' actions only appear on a snippet instance endpoint if you're logged in as the same user that created the code snippet.
+Откройте браузер и вы увидите что методы 'DELETE' и 'PUT' доступны только в том случае, если владелец сниппта совпадает с авторизованным пользователем.
 
 ## Авторизация при использовании API
 
@@ -196,9 +196,9 @@ Now, if you open a browser again, you find that the 'DELETE' and 'PUT' actions o
 
 Когда для доступа к API мы используем браузер, у нас есть возможность авторизоваться, после чего в рамках установленной сессии мы можем отправлять авторзованные запросы.
 
-If we're interacting with the API programmatically we need to explicitly provide the authentication credentials on each request.
+При программного использовании API нам необходимо в каждом запросе явным образом передавать параметры авторизации.
 
-If we try to create a snippet without authenticating, we'll get an error:
+Если мы попытаемся создать сниппет, не передавая авторизационных параметров, мы получим ошибку:
 
     http POST http://127.0.0.1:8000/snippets/ code="print 123"
 
@@ -206,7 +206,7 @@ If we try to create a snippet without authenticating, we'll get an error:
         "detail": "Authentication credentials were not provided."
     }
 
-We can make a successful request by including the username and password of one of the users we created earlier.
+Для выполнения успешного запроса нам необходимо передать имя и пароль пользователя.
 
     http -a tom:password123 POST http://127.0.0.1:8000/snippets/ code="print 789"
 
