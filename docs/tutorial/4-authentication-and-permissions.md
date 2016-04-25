@@ -141,18 +141,18 @@ REST фреймворк содержит набор классов, которы
 
     from django.conf.urls import include
 
-В конец файла добавьте паттерн, подключающей представления для авторизации и завершения сеанса браузерного API.
+В конец файла добавьте паттерн, подключающей представления для авторизации и выхода из сеанса браузерного API.
 
     urlpatterns += [
         url(r'^api-auth/', include('rest_framework.urls',
                                    namespace='rest_framework')),
     ]
 
-The `r'^api-auth/'` part of pattern can actually be whatever URL you want to use.  The only restriction is that the included urls must use the `'rest_framework'` namespace. In Django 1.9+, REST framework will set the namespace, so you may leave it out.
+Вместо паттерна `r'^api-auth/'` вы можете использовать любой другой, главное задать пространство имен `namespace='rest_framework'`. In Django 1.9+, REST framework will set the namespace, so you may leave it out.
 
-Now if you open up the browser again and refresh the page you'll see a 'Login' link in the top right of the page.  If you log in as one of the users you created earlier, you'll be able to create code snippets again.
+Если вы откроете браузер и обновите страницу, то в правом верхнем углу увидите ссылку на страницу авторизации 'Login'. После авторизации вы снова сможете создавать сниппеты.
 
-Once you've created a few code snippets, navigate to the '/users/' endpoint, and notice that the representation includes a list of the snippet pks that are associated with each user, in each user's 'snippets' field.
+После того как вы создадите несколько сниппетов, перейдите по ссылке '/users/' и убедитесь, что сериализованные данные каждого из пользователей, содержат аттрибут 'snippets', содержащий список, состоящий из идентификаторов сниппетов, связанных с пользователем.
 
 ## Установка прав доступа на уровне объекта
 
