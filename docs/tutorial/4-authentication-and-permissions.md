@@ -113,9 +113,9 @@
 
 **Note**: Убедитесь что вы добавили `'owner',` в список полей внутреннего метакласса `Meta`.
 
-This field is doing something quite interesting.  The `source` argument controls which attribute is used to populate a field, and can point at any attribute on the serialized instance.  It can also take the dotted notation shown above, in which case it will traverse the given attributes, in a similar way as it is used with Django's template language.
+Данное поле делает что-то очень интересное. Аргумент используется для указания аттрибута объекта, значение которого будет извлечено и сериализовано. Данный аргемент может содежать имя любого атрибута сериализуемого объекта. Также можно задать путь к желаемому аттрибуту объекта, используя при этом точки между именами аттрибутов, мы можем проходить по вложенной цепочке свойств сериализуемого объекта.
 
-The field we've added is the untyped `ReadOnlyField` class, in contrast to the other typed fields, such as `CharField`, `BooleanField` etc...  The untyped `ReadOnlyField` is always read-only, and will be used for serialized representations, but will not be used for updating model instances when they are deserialized. We could have also used `CharField(read_only=True)` here.
+В отличии от других полей для `'owner'` мы не указываем его тип, вместо этого мы используем класс `ReadOnlyField`. Поле, созданное на базе класса `ReadOnlyField`, может испольоваться только для чтения, его невозможно изменить при десериализации. Также мы можем использовать стандарный класс поля с указанием аргумента `read_only`, например, `CharField(read_only=True)`.
 
 ## Добавляем права доступа к представлению
 
