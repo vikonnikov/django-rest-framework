@@ -121,13 +121,13 @@
 
 Теперь нам хотелось бы сделать так, чтобы только авторизованные пользователи могли редактировать, обновлять или удалять сниппеты.
 
-REST framework includes a number of permission classes that we can use to restrict who can access a given view.  In this case the one we're looking for is `IsAuthenticatedOrReadOnly`, which will ensure that authenticated requests get read-write access, and unauthenticated requests get read-only access.
+REST фреймворк содержит набор классов, которые мы можем использовать для установки прав доступа к представлениям. В нашем случае мы будем использовать класс `IsAuthenticatedOrReadOnly`, представляющий доступ на запись и чтение только авторизованным пользователям, неавторизованные пользователи имеют доступ на чтение.
 
-First add the following import in the views module
+В начало модуля с представлениями добавьте следующий импорт:
 
     from rest_framework import permissions
 
-Then, add the following property to **both** the `SnippetList` and `SnippetDetail` view classes.
+Затем, в классы `SnippetList` и `SnippetDetail` добавьте следующий аттрибут:
 
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
