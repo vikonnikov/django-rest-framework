@@ -1,10 +1,10 @@
 # Tutorial 5: Relationships & Hyperlinked APIs
 
-At the moment relationships within our API are represented by using primary keys.  In this part of the tutorial we'll improve the cohesion and discoverability of our API, by instead using hyperlinking for relationships.
+В данный момент связи в нашем API представлены первичными ключами. В данной части, используя ссылочные связи, мы сделаем API чуть более явным и наглядным.
 
-## Creating an endpoint for the root of our API
+## Создание корневой точки входа API
 
-Right now we have endpoints for 'snippets' and 'users', but we don't have a single entry point to our API.  To create one, we'll use a regular function-based view and the `@api_view` decorator we introduced earlier. In your `snippets/views.py` add:
+Сейчас у нас есть точки входа для сниппетов 'snippets' и пользователей 'users', но у нас нет единой точки входа для API. Для её создания воспользуемся стандарным представлением на базе функции с описанным чуть ранее декоратором `@api_view`. Добавим в файл `snippets/views.py` следующее:
 
     from rest_framework.decorators import api_view
     from rest_framework.response import Response
@@ -18,9 +18,9 @@ Right now we have endpoints for 'snippets' and 'users', but we don't have a sing
             'snippets': reverse('snippet-list', request=request, format=format)
         })
 
-Two things should be noticed here. First, we're using REST framework's `reverse` function in order to return fully-qualified URLs; second, URL patterns are identified by convenience names that we will declare later on in our `snippets/urls.py`. 
+Стоит обратить внимание на 2 момента. Во-первых, мы используем функцию `reverse`, возвращающую полностью определенные URL-ы; во-вторых, именованные паттерны, по которым формируются URL-ы, будут описаны чуть позже в файле `snippets/urls.py`. 
 
-## Creating an endpoint for the highlighted snippets
+## Создание точек входа для подсвечиваемых сниппетов
 
 The other obvious thing that's still missing from our pastebin API is the code highlighting endpoints.
 
