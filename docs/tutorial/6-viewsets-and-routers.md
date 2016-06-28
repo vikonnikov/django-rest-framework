@@ -1,4 +1,4 @@
-# Tutorial 6: ViewSets & Routers
+# Часть 6: ViewSets и Routers
 
 REST framework includes an abstraction for dealing with `ViewSets`, that allows the developer to concentrate on modeling the state and interactions of the API, and leave the URL construction to be handled automatically, based on common conventions.
 
@@ -6,7 +6,7 @@ REST framework includes an abstraction for dealing with `ViewSets`, that allows 
 
 A `ViewSet` class is only bound to a set of method handlers at the last moment, when it is instantiated into a set of views, typically by using a `Router` class which handles the complexities of defining the URL conf for you.
 
-## Refactoring to use ViewSets
+## Рефакторинг кода с использованием ViewSets
 
 Let's take our current set of views, and refactor them into view sets.
 
@@ -55,7 +55,7 @@ Custom actions which use the `@detail_route` decorator will respond to `GET` req
 
 The URLs for custom actions by default depend on the method name itself. If you want to change the way url should be constructed, you can include url_path as a decorator keyword argument.
 
-## Binding ViewSets to URLs explicitly
+## Явное связывание ViewSets с URLs
 
 The handler methods only get bound to the actions when we define the URLConf.
 To see what's going on under the hood let's first explicitly create a set of views from our ViewSets.
@@ -98,7 +98,7 @@ Now that we've bound our resources into concrete views, we can register the view
         url(r'^users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail')
     ])
 
-## Using Routers
+## Использование роутеров
 
 Because we're using `ViewSet` classes rather than `View` classes, we actually don't need to design the URL conf ourselves.  The conventions for wiring up resources into views and urls can be handled automatically, using a `Router` class.  All we need to do is register the appropriate view sets with a router, and let it do the rest.
 
@@ -130,7 +130,7 @@ Using viewsets can be a really useful abstraction.  It helps ensure that URL con
 
 That doesn't mean it's always the right approach to take.  There's a similar set of trade-offs to consider as when using class-based views instead of function based views.  Using viewsets is less explicit than building your views individually.
 
-## Reviewing our work
+## Результаты нашей работы
 
 With an incredibly small amount of code, we've now got a complete pastebin Web API, which is fully web browsable, and comes complete with authentication, per-object permissions, and multiple renderer formats.
 
@@ -138,7 +138,7 @@ We've walked through each step of the design process, and seen how if we need to
 
 You can review the final [tutorial code][repo] on GitHub, or try out a live example in [the sandbox][sandbox].
 
-## Onwards and upwards
+## Открываем новые горизонты
 
 We've reached the end of our tutorial.  If you want to get more involved in the REST framework project, here are a few places you can start:
 
