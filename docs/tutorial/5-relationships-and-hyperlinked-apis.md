@@ -1,4 +1,4 @@
-# Tutorial 5: Relationships & Hyperlinked APIs
+# Часть 5: Связи и ссылочное APIs
 
 В данный момент связи в нашем API представлены первичными ключами. В данной части, используя ссылочные связи, мы сделаем API чуть более явным и наглядным.
 
@@ -50,7 +50,7 @@ And then add a url pattern for the snippet highlights:
 
     url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', views.SnippetHighlight.as_view()),
 
-## Hyperlinking our API
+## Использование ссылочного связывания в API
 
 Dealing with relationships between entities is one of the more challenging aspects of Web API design.  There are a number of different ways that we might choose to represent a relationship:
 
@@ -95,7 +95,7 @@ Notice that we've also added a new `'highlight'` field.  This field is of the sa
 
 Because we've included format suffixed URLs such as `'.json'`, we also need to indicate on the `highlight` field that any format suffixed hyperlinks it returns should use the `'.html'` suffix.
 
-## Making sure our URL patterns are named
+## Именование URL-паттернов
 
 If we're going to have a hyperlinked API, we need to make sure we name our URL patterns.  Let's take a look at which URL patterns we need to name.
 
@@ -136,7 +136,7 @@ After adding all those names into our URLconf, our final `snippets/urls.py` file
                                    namespace='rest_framework')),
     ]
 
-## Adding pagination
+## Добавляем разделение на страницы
 
 The list views for users and code snippets could end up returning quite a lot of instances, so really we'd like to make sure we paginate the results, and allow the API client to step through each of the individual pages.
 
@@ -150,7 +150,7 @@ Note that settings in REST framework are all namespaced into a single dictionary
 
 We could also customize the pagination style if we needed too, but in this case we'll just stick with the default.
 
-## Browsing the API
+## Просмотр API в браузере
 
 If we open a browser and navigate to the browsable API, you'll find that you can now work your way around the API simply by following links.
 
