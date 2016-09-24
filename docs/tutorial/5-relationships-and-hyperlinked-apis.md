@@ -22,13 +22,15 @@
 
 ## Создание точек входа для подсвечиваемых сниппетов
 
-The other obvious thing that's still missing from our pastebin API is the code highlighting endpoints.
+В нашем приложении отсутствует API для оображения сниппетов с подсвеченным синтаксисом.
 
-Unlike all our other API endpoints, we don't want to use JSON, but instead just present an HTML representation.  There are two styles of HTML renderer provided by REST framework, one for dealing with HTML rendered using templates, the other for dealing with pre-rendered HTML.  The second renderer is the one we'd like to use for this endpoint.
+В отличии от всех остальных отчек входа API, нам не нужено возвращать JSON, вместо этого нам нужно получить HTML. REST фреймворк позволяет отрендерить HTML двумя способами: первый - используя шаблоны, и второй - используя заранее сгенерированный HTML. Мы воспользуемся вторым способом.
 
 The other thing we need to consider when creating the code highlight view is that there's no existing concrete generic view that we can use.  We're not returning an object instance, but instead a property of an object instance.
 
-Instead of using a concrete generic view, we'll use the base class for representing instances, and create our own `.get()` method.  In your `snippets/views.py` add:
+При создании представления для отображения подсвеченного кода мы не сможем воспользоваться каким-то конкретным представлением из числа доступных, поскольку наше представление должно возвращать не объект, а его атрибут `snippet.highlighted`.
+
+Вместо использования какого-то конкретного общего представления, мы воспользуемся базовым классом `generics.GenericAPIView` (от которого унаследованы общие представления) и переопределим метод `.get()`. Отредактируем модуль `snippets/views.py`:
 
     from rest_framework import renderers
     from rest_framework.response import Response
@@ -41,12 +43,12 @@ Instead of using a concrete generic view, we'll use the base class for represent
             snippet = self.get_object()
             return Response(snippet.highlighted)
 
-As usual we need to add the new views that we've created in to our URLconf.
-We'll add a url pattern for our new API root in `snippets/urls.py`:
+И как обычно после создания представлений нам необходимо добавить их в наш URLconf.
+В модуль `snippets/urls.py` мы добавим url для  корневой точки входа:
 
     url(r'^$', views.api_root),
 
-And then add a url pattern for the snippet highlights:
+Также добавим url для подсветки синтаксиса сниппета:
 
     url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', views.SnippetHighlight.as_view()),
 
