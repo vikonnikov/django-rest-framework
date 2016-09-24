@@ -56,7 +56,7 @@ The other thing we need to consider when creating the code highlight view is tha
 
 Dealing with relationships between entities is one of the more challenging aspects of Web API design.  There are a number of different ways that we might choose to represent a relationship:
 
-Организация взаимосвязями между объектами является одним из наболее сложных аспектов проектирования Web API. Существует несколько способов отражения связи между объектами.
+Организация взаимосвязи между объектами является одним из наболее сложных аспектов проектирования Web API. Существует несколько способов организация связи между объектами.
 
 * Использование первичных ключей
 * Использование ссылок между объектами
