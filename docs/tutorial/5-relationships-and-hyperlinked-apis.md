@@ -56,12 +56,14 @@ The other thing we need to consider when creating the code highlight view is tha
 
 Dealing with relationships between entities is one of the more challenging aspects of Web API design.  There are a number of different ways that we might choose to represent a relationship:
 
-* Using primary keys.
-* Using hyperlinking between entities.
-* Using a unique identifying slug field on the related entity.
-* Using the default string representation of the related entity.
-* Nesting the related entity inside the parent representation.
-* Some other custom representation.
+Организация взаимосвязями между объектами является одним из наболее сложных аспектов проектирования Web API. Существует несколько способов отражения связи между объектами.
+
+* Использование первичных ключей
+* Использование ссылок между объектами
+* Использование уникальных индетифицирущих полей со слагами для связанного объекта
+* ИСпользование некторого строкового предстваления связанного объекта
+* Встравивание связанного объекта в родительский
+* Некоторые другие кастомные представления
 
 REST framework supports all of these styles, and can apply them across forward or reverse relationships, or apply them across custom managers such as generic foreign keys.
 
