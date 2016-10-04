@@ -54,22 +54,20 @@ The other thing we need to consider when creating the code highlight view is tha
 
 ## Использование ссылочного связывания в API
 
-Dealing with relationships between entities is one of the more challenging aspects of Web API design.  There are a number of different ways that we might choose to represent a relationship:
-
-Организация взаимосвязи между объектами является одним из наболее сложных аспектов проектирования Web API. Существует несколько способов организация связи между объектами.
+Организация взаимосвязи между объектами является одним из наболее сложных аспектов проектирования Web API. Существует несколько способов организации связи между объектами:
 
 * Использование первичных ключей
 * Использование ссылок между объектами
 * Использование уникальных индетифицирущих полей со слагами для связанного объекта
-* ИСпользование некторого строкового предстваления связанного объекта
+* Использование некторого строкового предстваления связанного объекта
 * Встравивание связанного объекта в родительский
 * Некоторые другие кастомные представления
 
-REST framework supports all of these styles, and can apply them across forward or reverse relationships, or apply them across custom managers such as generic foreign keys.
+REST фреймворк подерживает все эти способы, они могут использоваться для организации как прямых так и обратных связей, или в кастомных менеджерах, например, в качестве внешнего ключа (generic.GenericForeignKey) при реализации обобщенной связи.
 
-In this case we'd like to use a hyperlinked style between entities.  In order to do so, we'll modify our serializers to extend `HyperlinkedModelSerializer` instead of the existing `ModelSerializer`.
+Для связи между объектами воспользуемся ссылками. Для этого немного исправим наш сериализатор и унаследуем его от `HyperlinkedModelSerializer`.
 
-The `HyperlinkedModelSerializer` has the following differences from `ModelSerializer`:
+Приведем отличия сериализатора`HyperlinkedModelSerializer` от `ModelSerializer`:
 
 * It does not include the `pk` field by default.
 * It includes a `url` field, using `HyperlinkedIdentityField`.
@@ -141,6 +139,8 @@ After adding all those names into our URLconf, our final `snippets/urls.py` file
     ]
 
 ## Добавляем разделение на страницы
+
+Представления для списка пользователей или списка сниппетов при отображении большого количества объектовмогут выглядеть слишком громоздко, поэтому следует воспользоваться постраничным разделением.
 
 The list views for users and code snippets could end up returning quite a lot of instances, so really we'd like to make sure we paginate the results, and allow the API client to step through each of the individual pages.
 
