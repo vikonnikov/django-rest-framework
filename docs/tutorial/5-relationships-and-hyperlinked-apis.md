@@ -26,8 +26,6 @@
 
 В отличии от всех остальных отчек входа API, нам не нужено возвращать JSON, вместо этого нам нужно получить HTML. REST фреймворк позволяет отрендерить HTML двумя способами: первый - используя шаблоны, и второй - используя заранее сгенерированный HTML. Мы воспользуемся вторым способом.
 
-The other thing we need to consider when creating the code highlight view is that there's no existing concrete generic view that we can use.  We're not returning an object instance, but instead a property of an object instance.
-
 При создании представления для отображения подсвеченного кода мы не сможем воспользоваться каким-то конкретным представлением из числа доступных, поскольку наше представление должно возвращать не объект, а его атрибут `snippet.highlighted`.
 
 Вместо использования какого-то конкретного общего представления, мы воспользуемся базовым классом `generics.GenericAPIView` (от которого унаследованы общие представления) и переопределим метод `.get()`. Отредактируем модуль `snippets/views.py`:
@@ -69,12 +67,11 @@ REST фреймворк подерживает все эти способы, о�
 
 Приведем отличия сериализатора`HyperlinkedModelSerializer` от `ModelSerializer`:
 
-* It does not include the `pk` field by default.
-* It includes a `url` field, using `HyperlinkedIdentityField`.
-* Relationships use `HyperlinkedRelatedField`,
-  instead of `PrimaryKeyRelatedField`.
+* По умолчанию у него нет поля `pk`
+* Зато у него есть поле `url`, созданное с помощью `HyperlinkedIdentityField`
+* Для связей используется поле `HyperlinkedRelatedField` вместо поля `PrimaryKeyRelatedField`
 
-We can easily re-write our existing serializers to use hyperlinking. In your `snippets/serializers.py` add:
+Для перехода к ссылочному связыванию немного перепишем наш сериализатор. Отредактируем `snippets/serializers.py:
 
     class SnippetSerializer(serializers.HyperlinkedModelSerializer):
         owner = serializers.ReadOnlyField(source='owner.username')
@@ -93,7 +90,7 @@ We can easily re-write our existing serializers to use hyperlinking. In your `sn
             model = User
             fields = ('url', 'username', 'snippets')
 
-Notice that we've also added a new `'highlight'` field.  This field is of the same type as the `url` field, except that it points to the `'snippet-highlight'` url pattern, instead of the `'snippet-detail'` url pattern.
+Мы добавили новое поле 'highlight'. Это поле имеет тотже ти что и поле `url`, за исключение того что оно указывает на именованный url-паттерн 'snippet-highlight', вместо url-паттерна с именем 'snippet-detail'.
 
 Because we've included format suffixed URLs such as `'.json'`, we also need to indicate on the `highlight` field that any format suffixed hyperlinks it returns should use the `'.html'` suffix.
 
