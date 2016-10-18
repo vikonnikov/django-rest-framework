@@ -137,26 +137,24 @@ REST фреймворк подерживает все эти способы, о�
 
 ## Добавляем разделение на страницы
 
-Представления для списка пользователей или списка сниппетов при отображении большого количества объектовмогут выглядеть слишком громоздко, поэтому следует воспользоваться постраничным разделением.
+Представления для списка пользователей или списка сниппетов при отображении большого количества объектов могут выглядеть слишком громоздко, поэтому следует воспользоваться постраничным разделением.
 
-The list views for users and code snippets could end up returning quite a lot of instances, so really we'd like to make sure we paginate the results, and allow the API client to step through each of the individual pages.
-
-We can change the default list style to use pagination, by modifying our `tutorial/settings.py` file slightly.  Add the following setting:
+Немного отредактируем файл `tutorial/settings.py` и добавим в него следующие строки:
 
     REST_FRAMEWORK = {
         'PAGE_SIZE': 10
     }
 
-Note that settings in REST framework are all namespaced into a single dictionary setting, named 'REST_FRAMEWORK', which helps keep them well separated from your other project settings.
+Отметим, что все натсроки REST фреймворка, содержатся в одном словаре в параметре 'REST_FRAMEWORK', что позволяет отделить настройки фреймворка от других настроек проекта.
 
-We could also customize the pagination style if we needed too, but in this case we'll just stick with the default.
+Также, если это необходимо, мы можем изменить стиль постраничного отображения, но в нашем случае мы не будем этим заниматься.
 
 ## Просмотр API в браузере
 
-If we open a browser and navigate to the browsable API, you'll find that you can now work your way around the API simply by following links.
+Если мы откроем браузер и перейдем к нашему API, то обнаружим что можем работать со связанными данными просто переходя по ссылкам.
 
-You'll also be able to see the 'highlight' links on the snippet instances, that will take you to the highlighted code HTML representations.
+Если перейти в объект сниппета, то мы сможем увидеть в поле 'highlight' ссылку, которая приведет нас к коду сниппета, ситаксис которого подсвечен с помощью HTM.
 
-In [part 6][tut-6] of the tutorial we'll look at how we can use ViewSets and Routers to reduce the amount of code we need to build our API.
+В [части 6][tut-6] мы попытаемся уменьшить количество кода, необходимого для реализации нашего API, за счет использования наборов представлений `ViewSets` и роутеров `Routers`.
 
 [tut-6]: 6-viewsets-and-routers.md
