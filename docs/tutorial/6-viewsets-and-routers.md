@@ -1,10 +1,10 @@
 # Часть 6: ViewSets и Routers
 
-REST framework includes an abstraction for dealing with `ViewSets`, that allows the developer to concentrate on modeling the state and interactions of the API, and leave the URL construction to be handled automatically, based on common conventions.
+REST фреймворк содержит класс `ViewSets`, значительно облегчающий разработку API. Класс `ViewSets` автоматизирует процесс связывания url-паттернов с представленями на основе некоторых общих правил и позволяет разработчику сосредоточиться на моделировании состояний и взаимодействии API.
 
-`ViewSet` classes are almost the same thing as `View` classes, except that they provide operations such as `read`, or `update`, and not method handlers such as `get` or `put`.
+Классы `ViewSet` очень похожи на обычные представления `View`. Отличие состоит в том, что у `ViewSet` нет методов `get` или `put`, в место этого в них реализован механизм обработки оепарций `read` или `update`.
 
-A `ViewSet` class is only bound to a set of method handlers at the last moment, when it is instantiated into a set of views, typically by using a `Router` class which handles the complexities of defining the URL conf for you.
+Связывание обработчиков и url-паттернов происходит в тот момент, когда `ViewSet` инициализируется в набор представлений. За конфигурирование url-ов отвечает класс `Router`.
 
 ## Рефакторинг кода с использованием ViewSets
 
