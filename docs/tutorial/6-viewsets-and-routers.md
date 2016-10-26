@@ -47,13 +47,13 @@ Next we're going to replace the `SnippetList`, `SnippetDetail` and `SnippetHighl
         def perform_create(self, serializer):
             serializer.save(owner=self.request.user)
 
-This time we've used the `ModelViewSet` class in order to get the complete set of default read and write operations.
+Мы использовали класс `ModelViewSet` с уже встроенным функционалом операций чтения и записи.
 
-Notice that we've also used the `@detail_route` decorator to create a custom action, named `highlight`.  This decorator can be used to add any custom endpoints that don't fit into the standard `create`/`update`/`delete` style.
+При создания кастомного метода `highlight` мы использовали декоратор `@detail_route`. Данный декоратор используются для создания точек входа API, отличающихся от стандартных `create`/`update`/`delete`.
 
-Custom actions which use the `@detail_route` decorator will respond to `GET` requests.  We can use the `methods` argument if we wanted an action that responded to `POST` requests.
+Методы, созданные с помощью декоратора `@detail_route`, отвечают на `GET` запросы. Для того чтобы метод отвечал на `POST` запросы, в декоратор необходимо добавить аргумент `methods`.
 
-The URLs for custom actions by default depend on the method name itself. If you want to change the way url should be constructed, you can include url_path as a decorator keyword argument.
+Url-паттерны для дополнительных методов, зависят от имени метода. Для изменения url-паттерна, автоматически генерируемого при создании кастомного метода, можно передать в декоратор именованный аргумент `url_path`.
 
 ## Явное связывание ViewSets с URLs
 
