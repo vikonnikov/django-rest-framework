@@ -123,9 +123,9 @@ The `DefaultRouter` class we're using also automatically creates the API root vi
 
 ## Trade-offs between views vs viewsets
 
-Using viewsets can be a really useful abstraction.  It helps ensure that URL conventions will be consistent across your API, minimizes the amount of code you need to write, and allows you to concentrate on the interactions and representations your API provides rather than the specifics of the URL conf.
+`ViewSet`  позволяет не только минимизировать количество кода, но и следовать определенным соглашениям при описании url-ов.  `ViewSet` и `Router` позволяют автоматизировать конфигурирование URL-ов, что позволяет разработчику сосредоточиться именно на функционале API.
 
-That doesn't mean it's always the right approach to take.  There's a similar set of trade-offs to consider as when using class-based views instead of function based views.  Using viewsets is less explicit than building your views individually.
+Но это конечно не означает что использование `ViewSet` является наиболее предпочтительным. Существуют случаи когда лучше использовать обычные представления вместо наборов. Описание представлений по одному является более явным способом чем использование наборов `ViewSet`.
 
 ## Результаты нашей работы
 
