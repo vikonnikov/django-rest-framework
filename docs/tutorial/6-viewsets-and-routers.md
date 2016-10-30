@@ -137,13 +137,15 @@ You can review the final [tutorial code][repo] on GitHub, or try out a live exam
 
 ## Открываем новые горизонты
 
+Вот мы и дошли до конца нашего руководства. Приведем еще несколько ресурсов, где вы сможете продолжить ваше знакомство с REST-фреймворком.
+
 We've reached the end of our tutorial.  If you want to get more involved in the REST framework project, here are a few places you can start:
 
 * Contribute on [GitHub][github] by reviewing and submitting issues, and making pull requests.
 * Join the [REST framework discussion group][group], and help build the community.
 * Follow [the author][twitter] on Twitter and say hi.
 
-**Now go build awesome things.**
+**Теперь давайте сделаем что-нибудь грандиозное.**
 
 
 [repo]: https://github.com/tomchristie/rest-framework-tutorial
