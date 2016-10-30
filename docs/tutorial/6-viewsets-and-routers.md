@@ -57,10 +57,7 @@ Url-паттерны для дополнительных методов, зав�
 
 ## Явное связывание ViewSets с URLs
 
-The handler methods only get bound to the actions when we define the URLConf.
-To see what's going on under the hood let's first explicitly create a set of views from our ViewSets.
-
-In the `urls.py` file we bind our `ViewSet` classes into a set of concrete views.
+Давайте создадим все представления `ViewSet` вручную и обычным способом свяжем их с url-паттернами в файле `urls.py`.
 
     from snippets.views import SnippetViewSet, UserViewSet, api_root
     from rest_framework import renderers
@@ -85,9 +82,9 @@ In the `urls.py` file we bind our `ViewSet` classes into a set of concrete views
         'get': 'retrieve'
     })
 
-Notice how we're creating multiple views from each `ViewSet` class, by binding the http methods to the required action for each view.
+Из каждого класса `ViewSet` мы создаем несколько представлений и связываем методы данных представлений с HTTP-методами.
 
-Now that we've bound our resources into concrete views, we can register the views with the URL conf as usual.
+Теперь зарегистрируем наши предствления в URL-конфиге.
 
     urlpatterns = format_suffix_patterns([
         url(r'^$', api_root),
