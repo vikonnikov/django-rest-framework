@@ -129,17 +129,15 @@ That doesn't mean it's always the right approach to take.  There's a similar set
 
 ## Результаты нашей работы
 
-With an incredibly small amount of code, we've now got a complete pastebin Web API, which is fully web browsable, and comes complete with authentication, per-object permissions, and multiple renderer formats.
+Написав совсем немного кода мы получили Web API для сохранения фрагментов кода, с возможностью работы из браузера, авторизацией, разграничением доступа и несколькими форматами отдаваемых данных.
 
-We've walked through each step of the design process, and seen how if we need to customize anything we can gradually work our way down to simply using regular Django views.
+Мы прошли все этапы процесса проектирования и рассмотрели способы доработки стандарных представлений Django под наши задачи.
 
-You can review the final [tutorial code][repo] on GitHub, or try out a live example in [the sandbox][sandbox].
+Код нашего приложения вы найдете на [GitHub][repo], также доступна [демка][sandbox] сервиса.
 
 ## Открываем новые горизонты
 
-Вот мы и дошли до конца нашего руководства. Приведем еще несколько ресурсов, где вы сможете продолжить ваше знакомство с REST-фреймворком.
-
-We've reached the end of our tutorial.  If you want to get more involved in the REST framework project, here are a few places you can start:
+Вот мы и дошли до конца нашего руководства. Приведем еще несколько ресурсов, где вы сможете продолжить ваше знакомство с REST-фреймворком:
 
 * Contribute on [GitHub][github] by reviewing and submitting issues, and making pull requests.
 * Join the [REST framework discussion group][group], and help build the community.
