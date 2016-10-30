@@ -97,9 +97,9 @@ Url-паттерны для дополнительных методов, зав�
 
 ## Использование роутеров
 
-Because we're using `ViewSet` classes rather than `View` classes, we actually don't need to design the URL conf ourselves.  The conventions for wiring up resources into views and urls can be handled automatically, using a `Router` class.  All we need to do is register the appropriate view sets with a router, and let it do the rest.
+Поскольку мы используем `ViewSet` раньше чем `View`, нам нет необходимости самим конфигурировать URL-ы. Для автоматизации связывания представлений и url-ов используется класс `Router`, для этого достаточно зарегистрировать наши представления в роутере.
 
-Here's our re-wired `urls.py` file.
+Так должен выглядеть переписанный нами модуль `urls.py`.
 
     from django.conf.urls import url, include
     from snippets import views
@@ -117,11 +117,11 @@ Here's our re-wired `urls.py` file.
         url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     ]
 
-Registering the viewsets with the router is similar to providing a urlpattern.  We include two arguments - the URL prefix for the views, and the viewset itself.
+Региcтрация `ViewSet` с помощью `Router` похожа на задание url в `urlpattern`. Мы указываем два аргумента - префикс для URL и пердставление.
 
-The `DefaultRouter` class we're using also automatically creates the API root view for us, so we can now delete the `api_root` method from our `views` module.
+Класс `DefaultRouter` автоматически создает корневую точку входа для нашего API, поэтому мы можем удалить метод `api_root` из модуля `views.py`.
 
-## Trade-offs between views vs viewsets
+## Что же лучше views или viewsets
 
 `ViewSet`  позволяет не только минимизировать количество кода, но и следовать определенным соглашениям при описании url-ов.  `ViewSet` и `Router` позволяют автоматизировать конфигурирование URL-ов, что позволяет разработчику сосредоточиться именно на функционале API.
 
