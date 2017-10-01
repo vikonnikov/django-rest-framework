@@ -1,28 +1,52 @@
 # Быстрый старт
 
-Итак, мы собираемся создать простой набор API-функций, который позволил бы нам просматривать, редактировать или удалять пользователей или группы. Под пользователями и группами бы подразумеваем стандарные джанговские объекты классов `User` и `Group`
+Итак, мы собираемся создать простой набор API-функций, который позволил бы пользователям с правами адмиистратора просматривать, редактировать или удалять других пользователей или группы. Под пользователями и группами бы подразумеваем стандарные джанговские объекты классов `User` и `Group`
 
 ## Настройка проекта
 
 Создайте новый Django проект `tutorial` и приложение `quickstart`
 
-    # Create the project directory
+    # Создадим директорию проекта
     mkdir tutorial
     cd tutorial
 
-    # Create a virtualenv to isolate our package dependencies locally
+    # С помощью virtualenv создадим изолированную среду для нашего проекта
     virtualenv env
     source env/bin/activate  # On Windows use `env\Scripts\activate`
 
-    # Install Django and Django REST framework into the virtualenv
+    # Установим Django и Django REST framework
     pip install django
     pip install djangorestframework
 
-    # Set up a new project with a single application
+    # Создадим новый проект и новое приложение
     django-admin.py startproject tutorial .  # Note the trailing '.' character
     cd tutorial
     django-admin.py startapp quickstart
     cd ..
+
+Структура нашего проекта будет выглядеть следующим образом:
+
+    $ pwd
+    <some path>/tutorial
+    $ find .
+    .
+    ./manage.py
+    ./tutorial
+    ./tutorial/__init__.py
+    ./tutorial/quickstart
+    ./tutorial/quickstart/__init__.py
+    ./tutorial/quickstart/admin.py
+    ./tutorial/quickstart/apps.py
+    ./tutorial/quickstart/migrations
+    ./tutorial/quickstart/migrations/__init__.py
+    ./tutorial/quickstart/models.py
+    ./tutorial/quickstart/tests.py
+    ./tutorial/quickstart/views.py
+    ./tutorial/settings.py
+    ./tutorial/urls.py
+    ./tutorial/wsgi.py
+
+Создание приложения внутри директории проекта может показаться не обычным, но использование пространства имен проекта позволяет избежать конфликта имен с внешним модулем (обсуждение данной темы выходит за рамки данного руководства).
 
 Мигрируйте текущую схему базы данных:
 
